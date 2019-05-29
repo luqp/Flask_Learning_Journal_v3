@@ -147,6 +147,20 @@ ul li a {
 .new-entry h2 {
 	margin-bottom: 35px;
 }
+
+.edit-entry form span,
+.new-entry form span {
+	color: darkgray;
+    font-size: 12px;
+}
+
+.edit-entry form ::placeholder,
+.new-entry form ::placeholder {
+	color: darkgray;
+	font-size: 12px;
+	line-height: 1.5;
+}
+
 .entry-list article {
 	margin-bottom: 70px;
 	text-align: center;

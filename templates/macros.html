@@ -1,0 +1,25 @@
+{% macro render_field(field, journal=None) %}
+
+    {% if field.name != 'csrf_token' %}
+        <label for="{{ field.name }}">{{ field.label.text }}</label>
+        {% if field.name == 'resources' %}
+            <span>[a name], [a link] then [enter to separate]</span>
+            <br>
+            <span></span>
+        {% endif %}
+        {% if field.type == "TextAreaField" %}
+            {% if field.name == 'resources' %}
+                <textarea id="{{ field.name }}" rows="{{ 5 }}" name="{{ field.name }}" placeholder="google, https://www.google.com/ &#10;Treehouse &#10;Flask, http://flask.pocoo.org/">{{ journal[field.name] }}</textarea>
+            {% else %}
+                <textarea id="{{ field.name }}" rows="{{ 5 }}" name="{{ field.name }}">{{ journal[field.name] }}</textarea>
+            {% endif %}
+        {% else %}
+            {% if field.name == 'time_spent' %}
+                {{ field(id=field.name, type=field.description, value=journal[field.name], placeholder="hours") }}
+            {% else %}
+                {{ field(id=field.name, type=field.description, value=journal[field.name]) }}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
+{% endmacro %}

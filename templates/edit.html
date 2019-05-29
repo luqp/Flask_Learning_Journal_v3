@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% from 'macros.html' import render_field  %}
+
+{% block content %}
+
+<div class="edit-entry">
+    <h2>Edit Entry</h2>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        {% for field in form %}
+            {{ render_field(field, journal) }}
+        {% endfor %}
+        <input type="submit" value="Update Journal" class="button">
+        <a href="{{ url_for('detail', journal_id=journal.id) }}" class="button button-secondary">Cancel</a>
+    </form>
+</div>
+
+{% endblock %}

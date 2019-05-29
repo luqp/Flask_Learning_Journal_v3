@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<div class="entry-list single">
+    <article>
+        <h1>{{ journal.title }}</h1>
+        <time date-time="{{ journal.date }}" datetime="{{ journal.date.strftime('%Y-%m-%d') }}">{{ journal.date.strftime('%B %d, %Y') }}</time>
+        <div class="entry">
+            <h3>Time Spent:</h3>
+            <p>{{ journal.time_spent }} Hours</p>
+        </div>
+        <div class="entry">
+            <h3>What I Learned:</h3>
+            <p>{{ journal.learned }}</p>
+        </div>
+        <div class="entry">
+            <h3>Resources to Remember:</h3>
+            <ul>
+                {% for link in resources %}
+                    {% if link[1] %}
+                        <li><a href="{{ link[1] }}" target="_blank">{{ link[0] }}</a></li>
+                    {% else %}
+                        <li target="_blank">{{ link[0] }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </article>
+</div>
+
+{% endblock %}
+
+{% block button_edit %}
+<div class="edit">
+    <p><a href="{{ url_for('edit', journal_id=journal.id) }}">Edit Entry</a></p>
+    <p><a href="{{ url_for('delete', journal_id=journal.id) }}">Delete Entry</a></p>
+</div>
+{% endblock %}
