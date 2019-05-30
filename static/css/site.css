@@ -196,7 +196,19 @@ ul li a {
 	font-size: 18px;
 }
 
+.notification {
+	font-size: 20px;
+	text-decoration-line: underline;
+	text-align: center;
+}
 
+.success {
+	color: #8fd88f;
+}
+
+.delete {
+	color: #e0ca20;
+}
 
 /* ==========================================================================
    Form Styles
