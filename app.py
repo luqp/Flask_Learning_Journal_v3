@@ -12,6 +12,10 @@ PORT = 8000
 DEBUG = True
 
 def handler_resources(text):
+    """
+        Select relevant information of the text input
+        and separates it into a list.
+    """
     links = re.compile(r"""
         ^(?P<link>[\w\s]+)[,]?
         \s?(?P<path>.+)?
@@ -51,7 +55,7 @@ def delete(journal_id):
         abort(404)
     else:
         journal.delete_instance()
-        flash("Your journal was deleted", "Delete")
+        flash("Your journal was deleted", "delete")
     return redirect(url_for('index'))
 
 
@@ -70,7 +74,7 @@ def edit(journal_id):
             journal.resources = form.resources.data
             journal.time_spent = form.time_spent.data
             journal.save()
-
+            flash("Your journal was edited successfuly", "success")
             return redirect(url_for('index'))
     dic_journal = {
         'id': journal.id,
@@ -85,6 +89,10 @@ def edit(journal_id):
 
 @app.route('/entries/<int:journal_id>')
 def detail(journal_id):
+    """ 
+        Show information of the specific journal
+        that is matched by the id into the url
+    """
     try:
         journal = models.Journal.get_by_id(journal_id)
         resources = handler_resources(journal.resources)
@@ -94,7 +102,7 @@ def detail(journal_id):
 
 
 @app.route('/entries/new', methods=('GET', 'POST'))
-def entrie_new():
+def entry_new():
     form = forms.JournalForm()
     if form.validate_on_submit():
         models.Journal.create_journal(
@@ -112,6 +120,9 @@ def entrie_new():
 @app.route('/')
 @app.route('/entries')
 def index():
+    """ 
+        Select existing entries to show them on the home page
+    """
     journals = models.Journal.select()
     return render_template('index.html', journals=journals)
 
