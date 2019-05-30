@@ -15,10 +15,12 @@
             <div class="container">
                 <div class="site-header">
                     <a class="logo" href="{{ url_for('index') }}"><i class="material-icons">library_books</i></a>
-                    <a class="button icon-right" href="{{ url_for('entrie_new') }}"><span>New Entry</span> <i class="material-icons">add</i></a>
+                    <a class="button icon-right" href="{{ url_for('entry_new') }}"><span>New Entry</span> <i class="material-icons">add</i></a>
                 </div>
             </div>
-            <div>
+        </header>
+        <section>
+            <div class="container notification">
             {% with messages = get_flashed_messages(with_categories=True) %}
                 {% if messages %}
                     {% for category, message in messages %}
@@ -27,8 +29,6 @@
                 {% endif %}
             {% endwith %}
             </div>
-        </header>
-        <section>
             <div class="container">
                 {% block content %}{% endblock %}
             </div>
